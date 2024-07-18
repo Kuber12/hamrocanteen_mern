@@ -1,9 +1,11 @@
 import React from 'react'
+import FoodCard from './cards/FoodCard'
 
 const HomePage = () => {
   return (
-    <div>
-      This is home page
+    <div className='w-full h-[100vh] flex justify-center items-center'>
+      
+      <FoodCard/>
     </div>
   )
 }
