@@ -1,15 +1,16 @@
 const Item = require("../models/itemModel");
+const asyncHandler = require("express-async-handler");
 
 const addItem = asyncHandler(async (req, res) => {
   const { name, price, itemImg, availableDays, unit } = req.body;
 
-  if (!name || !price || !itemImg || !availableDays || !unit) {
+  if (!name || !price || !availableDays || !unit) {
     return res.status(400).send({ message: "Please fill all fields!" });
   } else {
     const newItem = await Item.create({
       name,
       price,
-      itemImg,
+      itemImg: "default.png",
       availableDays,
       unit
     });
@@ -61,7 +62,6 @@ const getItemById = asyncHandler(async (req, res) => {
 
 const getAllItems = asyncHandler(async (req, res) => {
   const items = await Item.find();
-
   res.json(items);
 });
 

@@ -10,7 +10,7 @@ const itemSchema = mongoose.Schema({
     },
     itemImg: {
         type: String,
-        required: [true, "Please provide item image URL"]
+        required: [false, "Please provide item image URL"]
     },
     availableDays: {
         type: [String],
@@ -18,7 +18,7 @@ const itemSchema = mongoose.Schema({
     },
     unit: {
         type: String,
-        required: [true, "Please specify the name of unit"]
+        required: [false, "Please specify the name of unit"]
     }
 })
 
