@@ -4,12 +4,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import SignIn from './pages/login/SignIn'
 import HomePage from './pages/home/HomePage'
 import NotFound from './pages/NotFound'
+import About from './pages/about/About'
 
 function App() {
  const route = createBrowserRouter([
   {path:"/", element:<HomePage/>},
   {path:"/signIn",element:<SignIn/>},
-  {path:"/*", element:<NotFound/>}
+  {path:"/*", element:<NotFound/>},
+  {path:"/about",element:<About/>}
  ])
 
   return (
