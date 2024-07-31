@@ -47,6 +47,7 @@ const FoodCard = ({menu}) => {
     if(doesExist){
       alert("Already in cart please remove to update")
     }else{
+      alert("Added to cart")
       setReload(!reload)
       cartItems.push(itemToPut)
       localStorage.setItem("cart",JSON.stringify(cartItems))

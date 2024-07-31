@@ -54,13 +54,13 @@ useEffect(()=>{
               {cartDropdownOpen && (
                 <div className="absolute p-2 bg-white border-2 border-black border-solid shadow-md top-14 right-16 rounded-2xl w-[25rem] ">
                   <div className="flex flex-col p-5 gap-y-2">
-                    <div className="text-lg text-center">My Cart</div>
+                    <div className="text-lg font-bold text-center">My Cart</div>
                     {cartItem.map((item,i)=>(
                       <div key={i} className="w-full flex justify-between px-2 items-center h-[60px]">
                       <div className="font-bold">{item.name}</div>
-                      <div>{item.price}</div>
-                      <div>{item.itemCount}</div>
-                      <div onClick={() => handleRemoveFromCart(item.id)}>X</div>
+                      <div>x {item.itemCount}</div>
+                      <div>Rs {item.price}</div>
+                      <button onClick={() => handleRemoveFromCart(item.id)}>X</button>
                     </div>
                     ))
                     }
