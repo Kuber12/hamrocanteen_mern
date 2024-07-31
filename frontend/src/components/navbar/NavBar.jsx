@@ -13,16 +13,15 @@ const NavBar = () => {
           <Link to={"/contact"}>Contact Us</Link>
         </div>
         <div className="absolute right-10">
-          <div className="flex gap-10">
+          <div className="flex gap-5">
             <div onMouseOver={() => setcartDropdownOpen(true)} onMouseLeave={() => setcartDropdownOpen(false)}>
               <Link className="bg-white w-14 h-14 rounded-full" to={"/"}>
-                <img className="p-2" src="./user icon.png" alt="user"/>
+              <img className="p-2 w-14 h-14" src="./cart.svg" alt="user"/>
               </Link>
               {cartDropdownOpen && (
-                <div className="absolute border-solid border-2 border-black top-14 right-24 bg-white p-2 rounded-2xl shadow-md w-max">
+                <div className="absolute border-solid border-2 border-black top-14 right-16 bg-white p-2 rounded-2xl shadow-md w-max">
                   <div className="p-5">
                     <div className="text-lg text-center">11 M</div>
-                    
                   </div>
                 </div>)
               }
@@ -30,7 +29,7 @@ const NavBar = () => {
             </div>
             <div onMouseOver={() => setUserDropdownOpen(true)} onMouseLeave={() => setUserDropdownOpen(false)}>
               <Link className="bg-white w-14 h-14 rounded-full" to={"/"}>
-                <img className="p-2" src="./user icon.png" alt="user"/>
+                <img className="p-2 w-14 h-14" src="./user.svg" alt="user"/>
               </Link>
               {userDropdownOpen && (
                 <div className="absolute border-solid border-2 border-black top-14 right-0 bg-white p-2 rounded-2xl shadow-md w-max">
@@ -39,16 +38,15 @@ const NavBar = () => {
                     <div className="text-2xl font-bold text-center">Kuber Bajra Shakya</div>
                     <div className="text-lg text-center">9813758998</div>
 
-                    <div className="text-lg mt-2 border-solid border-4 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
+                    <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
                       View Orders
                     </div>
-                    <div className="text-lg mt-2 border-solid border-4 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
+                    <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
                       Sign Out
                     </div>
                   </div>
                 </div>)
               }
-              
             </div>
           </div>
         </div>
