@@ -31,7 +31,7 @@ const addOrder = asyncHandler(async (req, res) => {
     // Create the order
     const order = await Order.create({ 
         userId, 
-        items, 
+        items,
         grandTotal, 
         paymentMethod, 
         status, 
