@@ -1,7 +1,9 @@
-import React, { useReducer, useState } from 'react'
+import React, { useContext, useReducer, useState } from 'react'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { GrSubtractCircle } from "react-icons/gr";
-const FoodCard = () => {
+import { ReloadContext } from "../../context/ReloadContextProvider";
+const FoodCard = ({menu}) => {
+  const {reload,setReload} = useContext(ReloadContext)
   const initialState = {
     itemCount:1,
     itemMessage:""
@@ -30,6 +32,30 @@ const FoodCard = () => {
     }
   }
   const [state,dispatch] =useReducer(reducer,initialState) 
+
+  async function handleAddToCart(){
+    const cartItems =  JSON.parse(localStorage.getItem("cart")) || [];
+    console.log("Data from localstorage" + cartItems)
+    const {id,name,price} = menu
+    const itemToPut = {
+      id,
+      name,
+      price:( price* state.itemCount).toFixed(2),
+      itemCount:state.itemCount
+    }
+    const doesExist = cartItems.find((item)=> item.id == id);
+    if(doesExist){
+      alert("Already in cart please remove to update")
+    }else{
+      setReload(!reload)
+      cartItems.push(itemToPut)
+      localStorage.setItem("cart",JSON.stringify(cartItems))
+      console.log( "New local storage items" + cartItems)
+    }
+    
+
+  }
+
   return (
 
     <div className='w-[15rem] rounded-3xl  border  h-[18rem] bg-[#EBEBEB]'> 
@@ -39,7 +65,7 @@ const FoodCard = () => {
       </div>
       <div className='w-full font-bold py-5 px-2 h-[60%] '>
         <div className='w-full px-2 space-y-2'>
-            <h1 className='text-2xl'>Food</h1>
+            <h1 className='text-2xl'>{menu.name}</h1>
             <div className='flex items-center space-x-3'>
 
               <div className='flex items-center space-x-2'>
@@ -53,7 +79,7 @@ const FoodCard = () => {
               </div>
             </div>
             <div className='flex items-center gap-x-4'>
-              <div className='text-xl '>Rs 190</div> <button className='bg-[#EC5856] text-white rounded-2xl px-3 py-1 text-base'>Add to cart</button>
+              <div className='text-xl '>Rs {(menu.price * state.itemCount).toFixed(2)}</div> <button className='bg-[#EC5856] text-white rounded-2xl px-3 py-1 text-base' onClick={(e)=>handleAddToCart()}>Add to cart</button>
             </div>
             <div className='text-red-800'>{state.itemMessage}</div>
         </div>
