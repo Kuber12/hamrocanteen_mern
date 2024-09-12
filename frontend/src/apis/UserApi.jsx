@@ -12,6 +12,7 @@ const UserApi = () => {
         const data = await response.data.message;
         localStorage.setItem("token",JSON.stringify(data));
         console.log(data)
+        
         return true; //if response is with no error
       }catch(error){
         console.log(error + " user login error")
