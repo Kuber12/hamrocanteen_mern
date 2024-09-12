@@ -29,7 +29,7 @@ const navigate = useNavigate();
   }
 
   return (
-    <div className="w-full h-[100vh] backgroundCss  flex justify-center items-center">
+    <div className="w-full h-[100vh] bg-tertiary  flex justify-center items-center">
       <div className="w-[350px] space-y-3 backdrop-blur-sm   h-[450px] rounded-3xl  shadow-lg p-6 backdrop-filter bg-opacity-20 bg-white">
         <div className="w-full h-[40%]  flex justify-center items-center">
           <img className=" object-contain w-[20rem] h-[10rem]" src="./Logo.png" alt="logo image" />

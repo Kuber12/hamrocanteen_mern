@@ -35,7 +35,6 @@ const userSchema = mongoose.Schema({
         required: [false, "Please enter your status"],
         default: "active"
     }
-    
 })
 
 module.exports = mongoose.model("User",userSchema);

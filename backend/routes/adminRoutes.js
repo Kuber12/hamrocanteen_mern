@@ -3,12 +3,14 @@ const router = express.Router();
 const {
   loginAdmin,
   currentAdmin,
-  editAdmin
+  editAdmin,
+  createAdmin
 } = require("../controllers/adminController");
-const {validateToken, validateAdminToken} = require("../middleware/validateTokenHandler");
+const {validateAdminToken} = require("../middleware/validateTokenHandler");
 
 router.post("/login", loginAdmin);
+router.post("/register", createAdmin);
 router.get("/current", validateAdminToken, currentAdmin);
-router.get("/update", validateAdminToken, editAdmin);
+router.put("/update", validateAdminToken, editAdmin);
 
 module.exports = router;

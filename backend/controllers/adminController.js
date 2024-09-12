@@ -30,6 +30,24 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+const createAdmin = asyncHandler(async (req, res) => {
+  const { username, password, email } = req.body;
+  if (!username || !password || !email) {
+    return res.status(400).send({ message: "Please fill all fields!" });
+  } else {
+    const adminExist = await Admin.findOne({ username: username });
+    if (adminExist) return res.status(400).send("Admin already exists!");
+    // Hash the password before saving into database
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newAdmin = await Admin.create({
+        username: username,
+        password: hashedPassword,
+        email: email
+    });
+  }
+  res.json({ message: "Admin created successfully" });
+});
+
 const currentAdmin = asyncHandler(async (req, res) => {
   try {
     res.json(req.admin);
@@ -65,5 +83,4 @@ const editAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { loginAdmin, currentAdmin, editAdmin };
-
+module.exports = { loginAdmin, createAdmin, currentAdmin, editAdmin };
