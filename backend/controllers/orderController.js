@@ -1,69 +1,93 @@
 const mongoose = require('mongoose');
 const Item = require('../models/itemModel');
-const asyncHandler = require('express-async-handler');
 const Order = require('../models/orderModel');
+const User = require('../models/userModel');
+const asyncHandler = require('express-async-handler');
 
 const addOrder = asyncHandler(async (req, res) => {
-    const { userId, items, grandTotal, paymentMethod, status, orderDate } = req.body;
+    const { userId, items, paymentMethod, status, orderDate } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).send({ message: "Invalid user ID format" });
+    }
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(400).send({ message: `User with ID ${userId} not found` });
+    }
 
     // Fetch items based on item IDs
-    const itemIds = items.map(item => item.item);
+    const itemIds = items.map(item => item.id);
     const orderItems = await Item.find({ _id: { $in: itemIds } });
+    console.log("Fetched order items:", orderItems); // Debugging line
 
-    // Create a mapping from item ID to item data
-    const itemMap = new Map(orderItems.map(item => [item._id.toString(), item]));
+    if (orderItems.length !== items.length) {
+        return res.status(400).send({ message: "Some items are not found" });
+    }
+
+    // Create a mapping from item ID to quantity
+    const quantityMap = new Map(items.map(item => [item.id, item.quantity]));
 
     // Calculate the total price based on quantities
     let calculatedTotal = 0;
-    for (const orderItem of items) {
-        const item = itemMap.get(orderItem.item);
-        if (!item) {
-            return res.status(400).send({ message: `Item with ID ${orderItem.item} not found` });
-        }
-        calculatedTotal += item.price * orderItem.quantity;
-    }
+    const orderItemsData = orderItems.map(orderItem => {
+        const quantity = quantityMap.get(orderItem._id.toString());
 
-    // Validate the grand total
-    if (calculatedTotal !== grandTotal) {
-        return res.status(400).send({ message: "Invalid order: Grand total does not match calculated total" });
-    }
+        if (!quantity) {
+            throw new Error(`Quantity for item with ID ${orderItem._id} not provided`);
+        }
+
+        calculatedTotal += orderItem.price * quantity;
+
+        return {
+            item: orderItem._id,
+            name: orderItem.name,  // Include name
+            price: orderItem.price,  // Include price
+            itemImg: orderItem.itemImg,  // Include item image
+            availableDays: orderItem.availableDays,  // Include available days
+            unit: orderItem.unit,  // Include unit
+            quantity: quantity  // Include quantity
+        };
+    });
+
+    console.log("Order items data:", orderItemsData); // Debugging line
+
+    // Calculate the grandTotal
+    const grandTotal = calculatedTotal;
+
+    // Convert orderDate to a valid Date object, if necessary
+    const orderDateObj = isNaN(Date.parse(orderDate)) ? new Date() : new Date(orderDate);
 
     // Create the order
-    const order = await Order.create({ 
-        userId, 
-        items,
-        grandTotal, 
-        paymentMethod, 
-        status, 
-        orderDate 
+    const order = await Order.create({
+        userId: user._id,  // Use user's ObjectId
+        items: orderItemsData,  // Store the items with full details
+        grandTotal,
+        paymentMethod,
+        status,
+        orderDate: orderDateObj
     });
 
     res.json(order);
 });
 
+module.exports = { addOrder };
 
-const getAllOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find();
+// get all orders
+const getOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find().populate('userId', 'name');
     res.json(orders);
 });
 
-const getOrderById = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const order = await Order.findById(id);
-    if (!order) {
-        return res.status(404).send({ message: "Order not found" });
-    }
-    res.json(order);
-});
-
-const updateOrder = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const { status } = req.body;
+// update order status to paid
+const updateOrderStatus = asyncHandler(async (req, res) => {
+    const { id, status } = req.body;
     const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
     if (!order) {
         return res.status(404).send({ message: "Order not found" });
     }
-    res.json(order);
+    res.json({ message: "Order status updated successfully" });
 });
 
-module.exports = { addOrder, getAllOrders, getOrderById, updateOrder };
+module.exports = { addOrder, getOrders, updateOrderStatus};

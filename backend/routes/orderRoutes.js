@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { addItem, deleteItem, updateItem, getItemById, getAllItems } = require("../controllers/itemController");
-const validateToken = require("../middleware/validateTokenHandler");
+const {addOrder, getOrders, updateOrderStatus} = require("../controllers/orderController");
 
-router.post("/", addItem);
-router.get("/", getAllItems);
+router.post("/", addOrder);
+router.get("/", getOrders);
+router.put("/", updateOrderStatus);
 
 module.exports = router;
 

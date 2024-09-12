@@ -19,7 +19,10 @@ const itemSchema = mongoose.Schema({
     unit: {
         type: String,
         required: [false, "Please specify the name of unit"]
+    },
+    quantityBought: {
+        type: Number,
+        default: 0
     }
 })
-
-module.exports = mongoose.model("Item",itemSchema);
+module.exports =  mongoose.model('Item', itemSchema);

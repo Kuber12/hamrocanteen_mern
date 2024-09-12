@@ -12,7 +12,7 @@ function App() {
  const route = createBrowserRouter([
   {path:"/", element:<HomePage/>},
   {path:"/menu", element:<Menu/>},
-  {path:"/signIn",element:<SignIn/>},
+  {path:"/signin",element:<SignIn/>},
   {path:"/*", element:<NotFound/>},
   {path:"/about",element:<About/>}
  ])

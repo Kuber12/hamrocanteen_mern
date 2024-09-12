@@ -21,7 +21,21 @@ const userSchema = mongoose.Schema({
     phone: {
         type: String,
         required: [false,"Please enter your phone number"]
+    },
+    class: {
+        type: String,
+        required: [false, "Please enter your class"]
+    },
+    section: {
+        type: String,
+        required: [false, "Please enter your section"]
+    },
+    status: {
+        type: String,
+        required: [false, "Please enter your status"],
+        default: "active"
     }
+    
 })
 
 module.exports = mongoose.model("User",userSchema);
