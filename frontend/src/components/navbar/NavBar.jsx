@@ -7,17 +7,24 @@ const NavBar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [cartDropdownOpen, setcartDropdownOpen] = useState(false);
   const [grandTotal,setGrandTotal] = useState(0);
-  const [array,setArray] = useState([1,2,3,4,5])
+  const [array,setArray] = useState([1,2,3,4,5]);
+  const [userArray,setUserArray] = useState([]);
 
-useEffect(()=>{
-  ;(()=>{
-    const price =  cartItem.reduce((a,b)=> {
-      return Number.parseInt(a) + Number.parseFloat(b.price);
-    },0)
-   console.log(price)
-   setGrandTotal(price)
-   })()
-},[cartItem])
+  useEffect(()=>{
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if(user){
+      setUserArray(user)
+    }
+  },[])
+
+  useEffect(()=>{(()=>{
+      const price =  cartItem.reduce((a,b)=> {
+        return Number.parseInt(a) + Number.parseFloat(b.price);
+      },0)
+    console.log(price)
+    setGrandTotal(price)
+    })()
+  },[cartItem])
 
   useEffect(()=>{
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -25,8 +32,6 @@ useEffect(()=>{
       setCartItem(cart);
       // console.log(cart)
     }
-
-  
   },[reload])
   
 
@@ -77,27 +82,40 @@ useEffect(()=>{
               
             </div>
             
-            <div onMouseOver={() => setUserDropdownOpen(true)} onMouseLeave={() => setUserDropdownOpen(false)}>
-              <Link className="bg-white rounded-full w-14 h-14" to={"/"}>
-                <img className="p-2 w-14 h-14" src="./user.svg" alt="user"/>
-              </Link>
-              {userDropdownOpen && (
-                <div className="absolute right-0 p-2 bg-white border-2 border-black border-solid shadow-md top-14 rounded-2xl w-max">
-                  <div className="p-5">
-                    <div className="text-lg text-center">11 M</div>
-                    <div className="text-2xl font-bold text-center">Kuber Bajra Shakya</div>
-                    <div className="text-lg text-center">9813758998</div>
+            {
+              userArray.username ? (
+                <div onMouseOver={() => setUserDropdownOpen(true)} onMouseLeave={() => setUserDropdownOpen(false)}>
+                  <Link className="bg-white rounded-full w-14 h-14" to={"/"}>
+                    <img className="p-2 w-14 h-14" src="./user.svg" alt="user"/>
+                  </Link>
+                  {userDropdownOpen && (
+                    <div className="absolute right-0 p-2 bg-white border-2 border-black border-solid shadow-md top-14 rounded-2xl w-max">
+                      <div className="p-5">
+                        <div className="text-lg text-center">11 M</div>
+                        <div className="text-2xl font-bold text-center">Kuber Bajra Shakya</div>
+                        <div className="text-lg text-center">9813758998</div>
 
-                    <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
-                      View Orders
-                    </div>
-                    <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
-                      Sign Out
-                    </div>
-                  </div>
-                </div>)
-              }
-            </div>
+                        <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
+                          View Orders
+                        </div>
+                        <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold" onClick={() => {
+                          sessionStorage.clear();
+                          window.location.reload();
+                        }}>
+                          Sign Out
+                        </div>
+                      </div>
+                    </div>)
+                  }
+                </div>
+              ) : (
+                <div onMouseOver={() => setUserDropdownOpen(true)} onMouseLeave={() => setUserDropdownOpen(false)}>
+                  <Link className="bg-white rounded-full w-14 h-14" to={"/signin"}>
+                    <img className="p-2 w-14 h-14" src="./user.svg" alt="user"/>
+                  </Link>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ const Menu = () => {
           {/* second section  */}
           <div className=" w-full py-10 h-[100vh] ">
             <h1 className="text-4xl font-bold text-center">
-              Today's <span className="text-[#EC5856]">Menu</span>
+              Today&apos;s <span className="text-[#EC5856]">Menu</span>
             </h1>
     
             <div className="grid items-center w-full h-auto grid-cols-3 gap-20 px-10 py-20 justify-items-center">

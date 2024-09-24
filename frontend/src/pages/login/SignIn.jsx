@@ -21,6 +21,7 @@ const navigate = useNavigate();
     loginUser(user).then((res)=>{
       if(res == true){
         alert("login success")
+        sessionStorage.setItem("user",JSON.stringify({username:user.username,name:user.name,address:user.address,phone:user.phone,class:user.class,section:user.section,status:user.status}));
         navigate("/")
       }else{
         alert("login failed")
