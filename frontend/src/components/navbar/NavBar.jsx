@@ -38,7 +38,10 @@ useEffect(()=>{
   }
 
   return (
-      <div className="relative bg-[#FFF0E9] w-full h-[18vh] pt-5 items-center  flex justify-center px-20">
+      <div className="relative bg-[#FFF0E9] w-full h-[16vh] pt-5 items-center  flex justify-center px-20">
+        <div className="absolute left-10 w-24 h-24">
+          <img className="w-full h-full" src="Logo.png" alt="Logo Image" />
+        </div>
         <div className="flex h-[80%] text-xl font-semibold shadow-2xl rounded-full w-[50%] justify-evenly items-center bg-[#FFFFFF] top-10 ">
           <Link to={"/"}>Home</Link>
           <Link to={"/menu"}>Menu</Link>

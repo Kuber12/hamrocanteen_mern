@@ -20,15 +20,40 @@ const HomePage = () => {
   return (
     <div className=" w-full h-auto bg-[#FBFBFB] ">
       <NavBar />
-
       {/* first section  */}
-      <div className=" w-full h-[80vh] px-10 py-16 shadow-xl rounded-b-[8rem] bg-[#FFF0E9] ">
-        <div className="w-[10rem] h-[10rem] ">
-          <img className="w-full h-full" src="Logo.png" alt="Logo Image" />
-        </div>
+      <div className="w-full h-max px-40 pt-10 pb-16 shadow-xl rounded-b-[8rem] bg-[#FFF0E9] ">
         <div className="w-full h-full space-y-2 text-6xl font-bold">
-          <h1>Hamro</h1>
-          <h1 className="text-[#EC5856]   text-6xl ">Canteen</h1>
+          <h1>Order Now,</h1>
+          <h1 className="text-primary text-6xl">Enjoy Later</h1>
+          <div className="flex bg-primary w-max rounded-full place-items-center mt-4">
+            <div className="m-2  rounded-full bg-alternate">
+              <img className="p-2 w-14 h-14" src="./play.png" alt="play"/>
+            </div>
+            <span className="text-white text-2xl mr-2">How to order?</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex drop-shadow-2xl place-items-top mx-[22%] h-max mt-[2rem] bg-white relative top-[-5rem] rounded-lg">
+        <div className="flex flex-1 m-6">
+          <img className="p-2 w-14 h-14 bg-alternate rounded-full" src="./play.png" alt="play"/>
+          <div className="flex flex-col ml-3">
+            <span className="text-primary text-2xl">Online Order</span>
+            <span>Customers can pre-order their desired food.</span>
+          </div>
+        </div>
+        <div className="flex flex-1 m-6">
+          <img className="p-2 w-14 h-14 bg-alternate rounded-full" src="./play.png" alt="play"/>
+          <div className="flex flex-col ml-3">
+            <span className="text-primary text-2xl">Prevent Waste</span>
+            <span>As Canteen estimate of how much to make for a particular day they can make the right amount.</span>
+          </div>
+        </div>
+        <div className="flex flex-1 m-6">
+          <img className="p-2 w-14 h-14 bg-alternate rounded-full" src="./play.png" alt="play"/>
+          <div className="flex flex-col ml-3">
+            <span className="text-primary text-2xl">Managed receipt</span>
+            <span>Students as well as the business can get detailed report of sales in their canteen</span>
+          </div>
         </div>
       </div>
 

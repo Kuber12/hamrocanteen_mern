@@ -20,7 +20,7 @@ const itemSchema = mongoose.Schema({
         type: String,
         required: [false, "Please specify the name of unit"]
     },
-    quantityBought: {
+    quantitySold: {
         type: Number,
         default: 0
     }

@@ -25,7 +25,7 @@ const Menu = () => {
           <NavBar />
     
           {/* first section  */}
-          <div className=" w-full h-[80vh] px-10 py-16 shadow-xl rounded-b-[8rem] bg-[#FFF0E9] ">
+          <div className=" w-full h-max px-40 pt-10 pb-16 shadow-xl rounded-b-[8rem] bg-[#FFF0E9] ">
             <div className="w-[10rem] h-[10rem] ">
               <img className="w-full h-full" src="Logo.png" alt="Logo Image" />
             </div>

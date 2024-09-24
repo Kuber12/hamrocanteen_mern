@@ -53,6 +53,17 @@ const addOrder = asyncHandler(async (req, res) => {
 
     console.log("Order items data:", orderItemsData); // Debugging line
 
+    // Increase the quantity sold of each item by 1
+    await Promise.all(orderItemsData.map(async itemData => {
+        const item = await Item.findById(itemData.item);
+        if (!item) {
+            throw new Error(`Item with ID ${itemData.item} not found`);
+        }
+
+        item.quantitySold += 1;
+        await item.save();
+    }));
+
     // Calculate the grandTotal
     const grandTotal = calculatedTotal;
 
@@ -71,8 +82,6 @@ const addOrder = asyncHandler(async (req, res) => {
 
     res.json(order);
 });
-
-module.exports = { addOrder };
 
 // get all orders
 const getOrders = asyncHandler(async (req, res) => {
