@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Item = require('../models/itemModel');
 const Order = require('../models/orderModel');
 const User = require('../models/userModel');
+const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 
 const addOrder = asyncHandler(async (req, res) => {
@@ -89,6 +90,13 @@ const getOrders = asyncHandler(async (req, res) => {
     res.json(orders);
 });
 
+
+// get orders by user id
+const getUserOrders = asyncHandler(async (req, res) => {
+    const { userid } = req.params;
+    const orders = await Order.find({ userId: userid }).populate('userId', 'name');
+    res.json(orders);
+});
 // update order status to paid
 const updateOrderStatus = asyncHandler(async (req, res) => {
     const { id, status } = req.body;
@@ -99,4 +107,4 @@ const updateOrderStatus = asyncHandler(async (req, res) => {
     res.json({ message: "Order status updated successfully" });
 });
 
-module.exports = { addOrder, getOrders, updateOrderStatus};
+module.exports = { addOrder, getOrders,getUserOrders, updateOrderStatus};
