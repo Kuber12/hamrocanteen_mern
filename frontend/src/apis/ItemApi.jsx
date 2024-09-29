@@ -13,6 +13,18 @@ const ItemApi = () => {
     }
   }
 
+  async function addToOrder(value) {
+    const url = "http://localhost:3000/api/order";
+    try {
+      const res = await axios.get(url, value);
+      const data = await res.data;
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function add(value) {
     //   {
     //     "name":"Samosa",
@@ -22,7 +34,7 @@ const ItemApi = () => {
     //     "unit":"Plate"
     // }
     try {
-      const res = await axios.get("http://localhost:3000/api/item/add",value);
+      const res = await axios.get("http://localhost:3000/api/item/add", value);
       const data = await res.data;
       console.log(data);
       return data;
@@ -31,7 +43,7 @@ const ItemApi = () => {
     }
   }
 
-  return { getAllItems };
+  return { getAllItems,addToOrder };
 };
 
 export default ItemApi;

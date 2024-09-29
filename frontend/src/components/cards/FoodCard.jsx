@@ -2,9 +2,11 @@ import React, { useContext, useReducer, useState } from "react";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { GrSubtractCircle } from "react-icons/gr";
 import { ReloadContext } from "../../context/ReloadContextProvider";
+import { Link } from "react-router-dom";
 const FoodCard = ({ menu }) => {
   console.log(menu);
   const { reload, setReload } = useContext(ReloadContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   const initialState = {
     itemCount: 1,
     itemMessage: "",
@@ -96,12 +98,23 @@ const FoodCard = ({ menu }) => {
             <div className="text-xl ">
               Rs {(menu.price * state.itemCount).toFixed(2)}
             </div>{" "}
-            <button
-              className="bg-[#EC5856] text-white rounded-2xl px-3 py-1 text-base"
-              onClick={(e) => handleAddToCart()}
-            >
-              Add to cart
-            </button>
+            {user && user.username.length > 0 ? (
+              <button
+                className="bg-[#EC5856] text-white rounded-2xl px-3 py-1 text-base"
+                onClick={(e) => handleAddToCart()}
+              >
+                Add to cart
+              </button>
+            ) : (
+              <Link to={"/signin"}>
+                <button
+                  className="bg-[#EC5856] text-white rounded-2xl px-3 py-1 text-base"
+               
+                >
+                  Add to cart
+                </button>
+              </Link>
+            )}
           </div>
           <div className="text-red-800">{state.itemMessage}</div>
         </div>
