@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ReloadContext } from "../../context/ReloadContextProvider";
-import { khaltiConfig } from "../../khalti";
-import KhaltiCheckout from "khalti-checkout-web";
 
+
+import ItemApi from "../../apis/ItemApi";
 const NavBar = () => {
+  const { addToOrder } = ItemApi();
   const { reload, setReload } = useContext(ReloadContext);
   const [cartItem, setCartItem] = useState([]);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -32,6 +33,7 @@ const NavBar = () => {
       setGrandTotal(price);
     })();
   }, [cartItem]);
+  console.log(cartItem);
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -41,17 +43,26 @@ const NavBar = () => {
     }
   }, [reload]);
 
-  const checkout = new KhaltiCheckout(khaltiConfig);
+  
 
   // Handler to initiate payment when the button is clicked
   const handlePayment = () => {
-    // Show the payment modal with the desired amount (in paisa)
-    checkout.show({ amount: 1000 }); // Amount is in paisa (e.g., 1000 = 10 NPR)
+    const value = {
+      userId: userArray.id,
+      items: [...cartItem],
+      paymentMethod: "Cash",
+      status: "Not Paid",
+    };
+    addToOrder(value)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   //takes item's id
   function handleRemoveFromCart(id) {
-    console.log(id)
+    console.log(id);
     const updatedItem = cartItem.filter((item) => item._id !== id);
     localStorage.setItem("cart", JSON.stringify(updatedItem));
     setReload(!reload);
@@ -122,17 +133,17 @@ const NavBar = () => {
               {userDropdownOpen && (
                 <div className="absolute right-0 p-2 bg-white border-2 border-black border-solid shadow-md top-14 rounded-2xl w-max">
                   <div className="p-5">
-                    <div className="text-lg text-center">11 M</div>
+                    {/* <div className="text-lg text-center">11 M</div> */}
                     <div className="text-2xl font-bold text-center">
-                      Kuber Bajra Shakya
+                      {userArray.username}
                     </div>
-                    <div className="text-lg text-center">9813758998</div>
+                    {/* <div className="text-lg text-center">9813758998</div> */}
 
-                   <Link to="/vieworder">
-                   <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
-                      View Orders
-                    </div>
-                   </Link>
+                    <Link to="/vieworder">
+                      <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
+                        View Orders
+                      </div>
+                    </Link>
 
                     {typeof userArray.username == "string" &&
                     userArray.username.length > 0 ? (

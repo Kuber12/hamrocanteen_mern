@@ -43,7 +43,7 @@ const ItemApi = () => {
     }
   }
 
-  return { getAllItems,addToOrder };
+  return { getAllItems, addToOrder };
 };
 
 export default ItemApi;
