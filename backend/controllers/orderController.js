@@ -1,110 +1,84 @@
-const mongoose = require('mongoose');
-const Item = require('../models/itemModel');
 const Order = require('../models/orderModel');
-const User = require('../models/userModel');
-const jwt = require('jsonwebtoken');
-const asyncHandler = require('express-async-handler');
+const mongoose = require('mongoose');
 
-const addOrder = asyncHandler(async (req, res) => {
-    const { userId, items, paymentMethod, status, orderDate } = req.body;
+// Create a new order
+const addOrder = async (req, res) => {
+    try {
+        const { userId, cart, paymentMethod, status } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-        return res.status(400).send({ message: "Invalid user ID format" });
-    }
-
-    // Check if the user exists
-    const user = await User.findById(userId);
-    if (!user) {
-        return res.status(400).send({ message: `User with ID ${userId} not found` });
-    }
-
-    // Fetch items based on item IDs
-    const itemIds = items.map(item => item.id);
-    const orderItems = await Item.find({ _id: { $in: itemIds } });
-    console.log("Fetched order items:", orderItems); // Debugging line
-
-    if (orderItems.length !== items.length) {
-        return res.status(400).send({ message: "Some items are not found" });
-    }
-
-    // Create a mapping from item ID to quantity
-    const quantityMap = new Map(items.map(item => [item.id, item.quantity]));
-
-    // Calculate the total price based on quantities
-    let calculatedTotal = 0;
-    const orderItemsData = orderItems.map(orderItem => {
-        const quantity = quantityMap.get(orderItem._id.toString());
-
-        if (!quantity) {
-            throw new Error(`Quantity for item with ID ${orderItem._id} not provided`);
+        // Validate if required fields are present
+        if (!userId || !cart || cart.length === 0 || !paymentMethod || !status) {
+            return res.status(400).json({ error: "Missing required fields" });
         }
 
-        calculatedTotal += orderItem.price * quantity;
+        // Calculate the grand total from the cart items
+        let grandTotal = 0;
+        const items = cart.map(item => {
+            grandTotal += parseFloat(item.price) * item.itemCount; // Calculate total for each item
+            return {
+                name: item.name,
+                price: parseFloat(item.price), // Ensure price is a number
+                itemCount: item.itemCount
+            };
+        });
 
-        return {
-            item: orderItem._id,
-            name: orderItem.name,  // Include name
-            price: orderItem.price,  // Include price
-            itemImg: orderItem.itemImg,  // Include item image
-            availableDays: orderItem.availableDays,  // Include available days
-            unit: orderItem.unit,  // Include unit
-            quantity: quantity  // Include quantity
-        };
-    });
+        // Create a new order instance
+        const newOrder = new Order({
+            userId,
+            items,
+            grandTotal,
+            paymentMethod,
+            status
+        });
 
-    console.log("Order items data:", orderItemsData); // Debugging line
+        // Save the order to the database
+        const savedOrder = await newOrder.save();
+        res.status(201).json(savedOrder);
 
-    // Increase the quantity sold of each item by 1
-    await Promise.all(orderItemsData.map(async itemData => {
-        const item = await Item.findById(itemData.item);
-        if (!item) {
-            throw new Error(`Item with ID ${itemData.item} not found`);
-        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "An error occurred while creating the order" });
+    }
+};
 
-        item.quantitySold += 1;
-        await item.save();
-    }));
+// Get all orders
+const getOrders = async (req, res) => {
+    try {
+        const orders = await Order.find();
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "An error occurred while retrieving all orders" });
+    }
+};
 
-    // Calculate the grandTotal
-    const grandTotal = calculatedTotal;
-
-    // Convert orderDate to a valid Date object, if necessary
-    const orderDateObj = isNaN(Date.parse(orderDate)) ? new Date() : new Date(orderDate);
-
-    // Create the order
-    const order = await Order.create({
-        userId: user._id,  // Use user's ObjectId
-        items: orderItemsData,  // Store the items with full details
-        grandTotal,
-        paymentMethod,
-        status,
-        orderDate: orderDateObj
-    });
-
-    res.json(order);
-});
-
-// get all orders
-const getOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find().populate('userId', 'name');
-    res.json(orders);
-});
-
-
-// get orders by user id
-const getUserOrders = asyncHandler(async (req, res) => {
-    const { userid } = req.params;
-    const orders = await Order.find({ userId: userid }).populate('userId', 'name');
-    res.json(orders);
-});
-// update order status to paid
-const updateOrderStatus = asyncHandler(async (req, res) => {
+// Get orders of a particular user
+const getUserOrders = async (req, res) => {
+    const userId = req.params.userid;
+    try {
+        const orders = await Order.find({ userId });
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "An error occurred while retrieving orders of the user" });
+    }
+};
+// Update the status of an order
+const updateOrderStatus = async (req, res) => {
     const { id, status } = req.body;
-    const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
-    if (!order) {
-        return res.status(404).send({ message: "Order not found" });
+    try {
+        const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
+        res.status(200).json(order);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "An error occurred while updating the order status" });
     }
-    res.json({ message: "Order status updated successfully" });
-});
+};
 
-module.exports = { addOrder, getOrders,getUserOrders, updateOrderStatus};
+// Export the controller functions
+module.exports = {
+    addOrder,
+    getOrders,
+    getUserOrders,
+    updateOrderStatus
+};
