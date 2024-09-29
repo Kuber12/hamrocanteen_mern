@@ -1,6 +1,9 @@
 import React,{useContext, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { ReloadContext } from "../../context/ReloadContextProvider";
+import {khaltiConfig} from "../../khalti";
+import KhaltiCheckout from 'khalti-checkout-web';
+
 const NavBar = () => {
   const {reload,setReload} = useContext(ReloadContext)
   const [cartItem,setCartItem] = useState([]);
@@ -34,6 +37,13 @@ const NavBar = () => {
     }
   },[reload])
   
+  const checkout = new KhaltiCheckout(khaltiConfig);
+
+    // Handler to initiate payment when the button is clicked
+  const handlePayment = () => {
+      // Show the payment modal with the desired amount (in paisa)
+      checkout.show({ amount: 1000 });  // Amount is in paisa (e.g., 1000 = 10 NPR)
+  };
 
   //takes item's id
   function handleRemoveFromCart(id){
@@ -74,7 +84,7 @@ const NavBar = () => {
                     }
                     <div className="flex justify-center w-full gap-2 px-2 my-2"><span className="font-bold text-red-500">Grand Total:</span> Rs {grandTotal} </div>
                    <div className="flex items-center justify-center w-full">
-                   <button className="px-2 py-1 font-bold text-white bg-red-500 border-[3px] border-black rounded-2xl">CheckOut</button>
+                   <button className="px-2 py-1 font-bold bg-primary text-white bg-red-500 border-[3px] border-black rounded-2xl"  onClick={handlePayment}>CheckOut</button>
                    </div>
                   </div>
                 </div>)
