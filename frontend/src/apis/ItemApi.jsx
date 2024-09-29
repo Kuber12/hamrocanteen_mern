@@ -6,7 +6,7 @@ const ItemApi = () => {
     try {
       const res = await axios.get("http://localhost:3000/api/item");
       const data = await res.data;
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -14,11 +14,12 @@ const ItemApi = () => {
   }
 
   async function addToOrder(value) {
+    console.log(value)
     const url = "http://localhost:3000/api/order";
     try {
-      const res = await axios.get(url, value);
+      const res = await axios.post(url, value);
       const data = await res.data;
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (err) {
       console.log(err);
@@ -36,7 +37,7 @@ const ItemApi = () => {
     try {
       const res = await axios.get("http://localhost:3000/api/item/add", value);
       const data = await res.data;
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       console.log(error);

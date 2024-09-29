@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ReloadContext } from "../../context/ReloadContextProvider";
 
-
 import ItemApi from "../../apis/ItemApi";
 const NavBar = () => {
   const { addToOrder } = ItemApi();
@@ -43,19 +42,18 @@ const NavBar = () => {
     }
   }, [reload]);
 
-  
-
   // Handler to initiate payment when the button is clicked
   const handlePayment = () => {
     const value = {
       userId: userArray.id,
-      items: [...cartItem],
+      cart: [...cartItem],
       paymentMethod: "Cash",
       status: "Not Paid",
     };
     addToOrder(value)
       .then((res) => {
         console.log(res);
+        alert(res);
       })
       .catch((err) => console.log(err));
   };
