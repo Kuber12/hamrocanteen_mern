@@ -79,7 +79,7 @@ const AddItem = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen space-y-2">
+    <div className="flex flex-col items-center justify-center w-full space-y-2">
       <h1 className="text-3xl">Add Item</h1>
       <form
         onSubmit={handleSubmit}

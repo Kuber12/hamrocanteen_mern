@@ -11,6 +11,7 @@ import Admin from "./admin/Admin";
 import AdminLogin from "./admin/AdminLogin";
 import ViewOrder from "./pages/vieworder/ViewOrder";
 import AddItem from "./admin/AddItem";
+import AdminDashBoard from "./admin/components/AdminDashBoard";
 
 function App() {
   const route = createBrowserRouter([
@@ -23,9 +24,15 @@ function App() {
     { path: "/vieworder", element: <ViewOrder /> },
 
     //admin side
-    { path: "admin", element: <Admin /> },
+    {
+      path: "admin",
+      element: <Admin />,
+      children: [
+        { path: "", element: <AdminDashBoard /> },
+        { path: "/admin/additem", element: <AddItem /> },
+      ],
+    },
     { path: "admin/signin", element: <AdminLogin /> },
-    { path: "admin/additem", element: <AddItem /> },
   ]);
 
   return (

@@ -34,7 +34,7 @@ const Admin = () => {
                 Users
               </Link>
               <Link
-                to={"./additem"}
+                to={"/admin/additem"}
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
               >
                 <div className="inline-block w-5 h-5 mr-2" />
@@ -74,24 +74,12 @@ const Admin = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="flex-1 p-8">
-            <h2 className="mb-4 text-3xl font-semibold text-gray-800">
+          <main className="flex-1 p-8 overflow-y-auto  h-[100vh] ">
+            <h2 className="mb-5 text-3xl font-semibold text-gray-800">
               Welcome, Admin {admin?.username}!
             </h2>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {/* Dashboard Cards */}
-              <div className="p-6 bg-white rounded-lg shadow-md">
-                <h3 className="mb-2 text-xl font-semibold">Total Users</h3>
-                <p className="text-3xl font-bold">1,234</p>
-              </div>
-              <div className="p-6 bg-white rounded-lg shadow-md">
-                <h3 className="mb-2 text-xl font-semibold">Total Products</h3>
-                <p className="text-3xl font-bold">567</p>
-              </div>
-              <div className="p-6 bg-white rounded-lg shadow-md">
-                <h3 className="mb-2 text-xl font-semibold">Total Orders</h3>
-                <p className="text-3xl font-bold">89</p>
-              </div>
+            <div className="w-full px-5 pt-10 overflow-auto ">
+              <Outlet />
             </div>
           </main>
         </div>

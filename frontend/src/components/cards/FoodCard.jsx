@@ -64,7 +64,7 @@ const FoodCard = ({ menu }) => {
             src={menu?.itemImg}
             className="object-cover w-full h-full rounded-full"
             alt="Food Image"
-            onError={e=>e.target.src= "/default.png"}
+            onError={(e) => (e.target.src = "/default.png")}
           />
         </div>
       </div>
