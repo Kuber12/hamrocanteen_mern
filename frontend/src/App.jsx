@@ -10,6 +10,7 @@ import ReloadContextProvider from "./context/ReloadContextProvider";
 import Admin from "./admin/Admin";
 import AdminLogin from "./admin/AdminLogin";
 import ViewOrder from "./pages/vieworder/ViewOrder";
+import AddItem from "./admin/AddItem";
 
 function App() {
   const route = createBrowserRouter([
@@ -24,7 +25,7 @@ function App() {
     //admin side
     { path: "admin", element: <Admin /> },
     { path: "admin/signin", element: <AdminLogin /> },
-    { path: "admin/additem", element: <AdminLogin /> },
+    { path: "admin/additem", element: <AddItem /> },
   ]);
 
   return (

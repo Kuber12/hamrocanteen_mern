@@ -61,9 +61,10 @@ const FoodCard = ({ menu }) => {
       <div className="relative w-full h-[40%] ">
         <div className="w-[10rem] h-[10rem] absolute -right-16 -top-10 p-2 bg-[#EC5856] rounded-full">
           <img
-            src="burger.png"
-            className="object-contain w-full h-full rounded-full"
+            src={menu?.itemImg}
+            className="object-cover w-full h-full rounded-full"
             alt="Food Image"
+            onError={e=>e.target.src= "/default.png"}
           />
         </div>
       </div>
