@@ -94,4 +94,15 @@ const getUserDetails = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "User not found" });
   }
 });
-module.exports = { loginUser, registerUser,editUser, currentUser, getUserDetails };
+const getAllUsers = asyncHandler(async (req,res) => {
+  try{
+    const users = await User.findAll().select("-password");
+    res.status(200).json({ message: users });
+    res.json(req.users);
+  } catch (error) {
+    res.status(400).json({ message: "User not found" });
+  }
+})
+
+
+module.exports = { loginUser, registerUser,editUser, currentUser, getUserDetails, getAllUsers };
