@@ -51,9 +51,10 @@ const NavBar = () => {
 
   //takes item's id
   function handleRemoveFromCart(id) {
-    setReload(!reload);
-    const updatedItem = cartItem.filter((item) => item.id !== id);
+    console.log(id)
+    const updatedItem = cartItem.filter((item) => item._id !== id);
     localStorage.setItem("cart", JSON.stringify(updatedItem));
+    setReload(!reload);
   }
 
   return (
@@ -88,7 +89,7 @@ const NavBar = () => {
                       <div className="font-bold">{item.name}</div>
                       <div>x {item.itemCount}</div>
                       <div>Rs {item.price}</div>
-                      <button onClick={() => handleRemoveFromCart(item.id)}>
+                      <button onClick={() => handleRemoveFromCart(item._id)}>
                         X
                       </button>
                     </div>
@@ -127,9 +128,11 @@ const NavBar = () => {
                     </div>
                     <div className="text-lg text-center">9813758998</div>
 
-                    <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
+                   <Link to="/vieworder">
+                   <div className="text-lg mt-2 border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold">
                       View Orders
                     </div>
+                   </Link>
 
                     {typeof userArray.username == "string" &&
                     userArray.username.length > 0 ? (
@@ -137,6 +140,7 @@ const NavBar = () => {
                         className="text-lg mt-2 cursor-pointer border-solid border-2 rounded-full p-2 border-black bg-[#EC5856] text-white text-center font-bold"
                         onClick={() => {
                           localStorage.removeItem("user");
+                          localStorage.removeItem("token");
                           window.location.reload();
                         }}
                       >

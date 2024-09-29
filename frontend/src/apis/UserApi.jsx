@@ -6,6 +6,7 @@ const UserApi = () => {
   const URL = "http://localhost:3000";
 
   async function loginUser(user) {
+    console.log(user);
     try {
       const EndPoint = URL + "/api/user/login";
       console.log("Endpoint: ", EndPoint);
@@ -39,7 +40,18 @@ const UserApi = () => {
     }
   }
 
-  return { loginUser };
+  async function getUserOrder(id) {
+    try {
+      const res = await axios.get("http://localhost:3000/api/order/" + id);
+      const data = await res.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return { loginUser,getUserOrder };
 };
 
 export default UserApi;

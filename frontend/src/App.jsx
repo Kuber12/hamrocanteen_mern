@@ -9,6 +9,7 @@ import Menu from "./pages/menu/Menu";
 import ReloadContextProvider from "./context/ReloadContextProvider";
 import Admin from "./admin/Admin";
 import AdminLogin from "./admin/AdminLogin";
+import ViewOrder from "./pages/vieworder/ViewOrder";
 
 function App() {
   const route = createBrowserRouter([
@@ -18,6 +19,7 @@ function App() {
     { path: "/signin", element: <SignIn /> },
     { path: "/*", element: <NotFound /> },
     { path: "/about", element: <About /> },
+    { path: "/vieworder", element: <ViewOrder /> },
 
     //admin side
     { path: "admin", element: <Admin /> },
