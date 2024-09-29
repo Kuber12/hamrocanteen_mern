@@ -10,7 +10,7 @@ const Admin = () => {
   return (
     <>
       {admin == undefined ? (
-        <NotFound/>
+        <NotFound />
       ) : (
         <div className="flex h-screen bg-gray-100">
           {/* Sidebar */}
@@ -34,6 +34,13 @@ const Admin = () => {
                 Users
               </Link>
               <Link
+                to={"./additem"}
+                className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+              >
+                <div className="inline-block w-5 h-5 mr-2" />
+                Add Product
+              </Link>
+              <Link
                 href="#products"
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
               >
@@ -51,14 +58,14 @@ const Admin = () => {
             <Link
               to={"/signin"}
               onClick={() => {
-                localStorage.removeItem("token")
-                localStorage.removeItem("user")
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
               }}
               className="absolute bottom-0 w-64 p-4"
             >
               <button
                 variant="outline"
-                className="w-full justify-start text-red-600 hover:text-red-700"
+                className="justify-start w-full text-red-600 hover:text-red-700"
               >
                 <div className="w-5 h-5 mr-2" />
                 Logout
@@ -68,21 +75,21 @@ const Admin = () => {
 
           {/* Main Content */}
           <main className="flex-1 p-8">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
+            <h2 className="mb-4 text-3xl font-semibold text-gray-800">
               Welcome, Admin {admin?.username}!
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {/* Dashboard Cards */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-2">Total Users</h3>
+              <div className="p-6 bg-white rounded-lg shadow-md">
+                <h3 className="mb-2 text-xl font-semibold">Total Users</h3>
                 <p className="text-3xl font-bold">1,234</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-2">Total Products</h3>
+              <div className="p-6 bg-white rounded-lg shadow-md">
+                <h3 className="mb-2 text-xl font-semibold">Total Products</h3>
                 <p className="text-3xl font-bold">567</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-2">Total Orders</h3>
+              <div className="p-6 bg-white rounded-lg shadow-md">
+                <h3 className="mb-2 text-xl font-semibold">Total Orders</h3>
                 <p className="text-3xl font-bold">89</p>
               </div>
             </div>
