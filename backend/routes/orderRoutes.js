@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {validateToken} = require("../middleware/validateTokenHandler");
-const {addOrder, getOrders, getUserOrders, updateOrderStatus} = require("../controllers/orderController");
+const {addOrder, getOrders, getUserOrders, updateOrderStatus, predictNextSales} = require("../controllers/orderController");
 
 router.post("/", addOrder);
 router.get("/", getOrders);
+router.get("/predict",predictNextSales);
 router.get("/:userid", getUserOrders);
 router.put("/", updateOrderStatus);
 
