@@ -51,7 +51,17 @@ const UserApi = () => {
     }
   }
 
-  return { loginUser,getUserOrder };
+  async function getAllUsers() {
+    try {
+      const res = await axios.get("http://localhost:3000/api/user/list");
+      const data = await res.data.message;
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return { loginUser, getUserOrder,getAllUsers };
 };
 
 export default UserApi;
