@@ -12,6 +12,7 @@ import AdminLogin from "./admin/AdminLogin";
 import ViewOrder from "./pages/vieworder/ViewOrder";
 import AddItem from "./admin/AddItem";
 import AdminDashBoard from "./admin/components/AdminDashBoard";
+import ShowAllUsers from "./admin/ShowAllUsers";
 
 function App() {
   const route = createBrowserRouter([
@@ -30,6 +31,7 @@ function App() {
       children: [
         { path: "", element: <AdminDashBoard /> },
         { path: "/admin/additem", element: <AddItem /> },
+        { path: "/admin/show-user", element: <ShowAllUsers /> },
       ],
     },
     { path: "admin/signin", element: <AdminLogin /> },

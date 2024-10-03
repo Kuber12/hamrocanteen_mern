@@ -27,7 +27,7 @@ const Admin = () => {
                 Dashboard
               </Link>
               <Link
-                href="#users"
+                to={"/admin/show-user"}
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
               >
                 <div className="inline-block w-5 h-5 mr-2" />
