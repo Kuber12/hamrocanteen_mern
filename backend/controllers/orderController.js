@@ -1,17 +1,13 @@
 const Order = require('../models/orderModel');
 const mongoose = require('mongoose');
-
-// Create a new order
 const addOrder = async (req, res) => {
     try {
         const { userId, cart, paymentMethod, status } = req.body;
 
-        // Validate if required fields are present
         if (!userId || !cart || cart.length === 0 || !paymentMethod || !status) {
             return res.status(400).json({ error: "Missing required fields" });
         }
 
-        // Calculate the grand total from the cart items
         let grandTotal = 0;
         const items = cart.map(item => {
             grandTotal += parseFloat(item.price) * item.itemCount; // Calculate total for each item
@@ -155,7 +151,6 @@ function getContinuousWeekNumber(date) {
 
 
 // Function to group orders by continuous week of the year
-// Function to group orders by continuous week of the year starting from Sunday
 function groupOrdersByContinuousWeek(orders) {
     const grouped = {};
 
@@ -182,6 +177,7 @@ function groupOrdersByContinuousWeek(orders) {
     });
     return grouped;
 }
+
 
 // Export the controller functions
 module.exports = {

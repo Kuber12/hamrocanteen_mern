@@ -104,5 +104,13 @@ const getAllUsers = asyncHandler(async (req,res) => {
   }
 })
 
+const countUsers = asyncHandler(async (req, res) => {
+  try {
+    const count = await User.countDocuments();
+    res.status(200).json({ message: count });
+  } catch (error) {
+    res.status(400).json({ message: "User not found" });
+  }
+})
 
-module.exports = { loginUser, registerUser,editUser, currentUser, getUserDetails, getAllUsers };
+module.exports = { loginUser, registerUser,editUser, currentUser, getUserDetails, getAllUsers, countUsers };

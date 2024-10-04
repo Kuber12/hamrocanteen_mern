@@ -65,5 +65,10 @@ const getAllItems = asyncHandler(async (req, res) => {
   res.json(items);
 });
 
-module.exports = { addItem, deleteItem, updateItem, getItemById, getAllItems };
+const countItems = asyncHandler(async (req, res) => {
+  const count = await Item.countDocuments();
+  res.json({ count });
+});
+
+module.exports = { addItem, deleteItem, updateItem, getItemById, getAllItems, countItems };
 
