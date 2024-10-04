@@ -60,8 +60,17 @@ const UserApi = () => {
       console.log(error);
     }
   }
+  async function getUserCount() {
+    try {
+      const res = await axios.get("http://localhost:3000/api/user/count");
+      const data = await res.data.message;
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  return { loginUser, getUserOrder,getAllUsers };
+  return { loginUser, getUserOrder, getAllUsers,getUserCount };
 };
 
 export default UserApi;
