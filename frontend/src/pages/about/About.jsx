@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import NavBar from '../../components/navbar/NavBar';
 
 const About = () => {
     
@@ -19,29 +20,9 @@ const About = () => {
         console.log(data)
     }
   return (
-    <div>
-        {data.map((i)=>(
-            <ul>
-                <li>{i}</li>
-            </ul>
-        ))}
-        <h1>check box</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-            <label htmlFor="">Sunday</label>
-            <input onChange={handleChange}  value={"sunday"} type="checkbox" />
-        </div>
-        <div>
-            <label htmlFor="">Monday</label>
-            <input  onChange={handleChange}   value={"monday"} type="checkbox" />
-        </div>
-        <div>
-            <label htmlFor="">Tuesday</label>
-            <input  onChange={handleChange}  value={"tuesday"} type="checkbox" />
-        </div>
-        <button type='submit'>Submit</button>
-      </form>
-    </div>
+    <>
+    <NavBar/>
+    </>
   )
 }
 

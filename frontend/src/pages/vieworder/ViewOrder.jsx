@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UserApi from "../../apis/UserApi";
 import FoodCard from "../../components/cards/FoodCard";
+import NavBar from "../../components/navbar/NavBar";
 
 const ViewOrder = () => {
   const { getUserOrder } = UserApi();
@@ -30,6 +31,8 @@ const ViewOrder = () => {
   };
 
   return (
+    <>
+    <NavBar/>
     <div className="w-full max-w-4xl p-6 mx-auto space-y-6">
       <h1 className="w-full mt-5 mb-10 text-5xl">Your Orders</h1>
       {itemOrder.map((order, index) => (
@@ -81,6 +84,7 @@ const ViewOrder = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 

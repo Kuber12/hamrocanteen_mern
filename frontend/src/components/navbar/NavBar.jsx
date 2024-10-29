@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ReloadContext } from "../../context/ReloadContextProvider";
 
@@ -10,7 +10,6 @@ const NavBar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [cartDropdownOpen, setcartDropdownOpen] = useState(false);
   const [grandTotal, setGrandTotal] = useState(0);
-  const [array, setArray] = useState([1, 2, 3, 4, 5]);
   const [userArray, setUserArray] = useState([]);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const NavBar = () => {
       setUserArray(user);
     }
   }, []);
-  console.log(userArray);
+  // console.log(userArray);
 
   const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ const NavBar = () => {
       const price = cartItem.reduce((a, b) => {
         return Number.parseInt(a) + Number.parseFloat(b.price);
       }, 0);
-      console.log(price);
+      // console.log(price);
       setGrandTotal(price);
     })();
   }, [cartItem]);
@@ -53,7 +52,9 @@ const NavBar = () => {
     addToOrder(value)
       .then((res) => {
         console.log(res);
-        alert(res);
+        setCartItem([])
+        localStorage.removeItem("cart")
+        alert(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -87,7 +88,7 @@ const NavBar = () => {
               <img className="p-2 w-14 h-14" src="./cart.svg" alt="user" />
             </Link>
             {cartDropdownOpen && (
-              <div className="absolute p-2 bg-white border-2 border-black border-solid shadow-md top-14 right-16 rounded-2xl w-[25rem] ">
+              <div className="absolute p-2 z-50 bg-white border-2 border-black border-solid shadow-md top-14 right-16 rounded-2xl w-[25rem] ">
                 <div className="flex flex-col p-5 gap-y-2">
                   <div className="text-lg font-bold text-center">My Cart</div>
                   {cartItem.map((item, i) => (
@@ -129,7 +130,7 @@ const NavBar = () => {
                 <img className="p-2 w-14 h-14" src="./user.svg" alt="user" />
               </Link>
               {userDropdownOpen && (
-                <div className="absolute right-0 p-2 bg-white border-2 border-black border-solid shadow-md top-14 rounded-2xl w-max">
+                <div className="absolute right-0 z-50 p-2 bg-white border-2 border-black border-solid shadow-md top-14 rounded-2xl w-max">
                   <div className="p-5">
                     {/* <div className="text-lg text-center">11 M</div> */}
                     <div className="text-2xl font-bold text-center">
