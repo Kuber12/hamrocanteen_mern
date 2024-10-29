@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { CiLock } from "react-icons/ci";
 import UserApi from "../../apis/UserApi";
@@ -63,7 +63,7 @@ const SignIn = () => {
                   onChange={(e) => {
                     setUser({ ...user, password: e.target.value });
                   }}
-                  type="text"
+                  type="password"
                   className="px-3 pl-10 py-1 w-[15rem] rounded-2xl drop-shadow-md"
                   placeholder="Password"
                 />

@@ -14,7 +14,11 @@ export default {
       'darkTxt': '#393A3C',
       'white': 'white'
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'whatis-right': "url('/public/whatis-right.jpeg')"
+      }
+    },
   },
   plugins: [],
 }

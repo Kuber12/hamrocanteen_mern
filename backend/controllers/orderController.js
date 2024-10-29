@@ -111,7 +111,6 @@ const predictNextSales = async (req, res) => {
         const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
         const intercept = (sumY - slope * sumX) / n;
 
-        // Step 4: Predict sales for the next continuous week (weekNumber = highest continuous week number + 1)
         const nextWeekNumber = Math.max(...salesData.map(data => data.weekNumber)) + 1;
         const predictedSales = slope * nextWeekNumber + intercept;
 
@@ -132,7 +131,6 @@ const predictNextSales = async (req, res) => {
 };
 
 // Function to get the continuous week number for a given date (based on year start)
-// Function to get the continuous week number for a given date (based on year start, week starts on Sunday)
 function getContinuousWeekNumber(date) {
     const startOfYear = new Date(date.getFullYear(), 0, 1);
     
