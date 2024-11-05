@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ItemApi from "../apis/ItemApi";
 const ShowAllProducts = () => {
   const { getAllItems } = ItemApi();
+  const [reload, setReload] = useState(false);
   const [items, setItems] = useState([]);
   useEffect(() => {
     getAllItems()
@@ -12,10 +13,17 @@ const ShowAllProducts = () => {
         setItems(res);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [reload]);
 
-  async function handleDelete(itemId){
-
+  async function handleDelete(itemId) {
+    axios
+      .delete(`http://localhost:3000/api/item/${itemId}`)
+      .then((res) => {
+        console.log(res);
+        alert("Deleted product");
+        setReload(!reload);
+      })
+      .catch((err) => console.log("Error when deleting " + err));
   }
 
   return (
@@ -41,11 +49,19 @@ const ShowAllProducts = () => {
           <tbody>
             {items &&
               items.map((item, i) => (
-                <tr key={item._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr
+                  key={item._id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
                   <td className="px-6 py-4">{i + 1}</td>
                   <td className="px-6 py-4">{item.name}</td>
                   <td className="px-6 py-4">{item.price}</td>
-                  <td className="px-6 py-4" onClick={()=>handleDelete(item?.id)}>Delete</td>
+                  <td
+                    className="px-6 py-4 cursor-pointer"
+                    onClick={() => handleDelete(item?._id)}
+                  >
+                    Delete
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -56,4 +72,3 @@ const ShowAllProducts = () => {
 };
 
 export default ShowAllProducts;
-
