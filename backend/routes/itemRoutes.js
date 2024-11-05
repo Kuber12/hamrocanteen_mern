@@ -4,7 +4,7 @@ const { addItem, deleteItem, updateItem, getItemById, getAllItems, countItems} =
 const validateToken = require("../middleware/validateTokenHandler");
 
 router.post("/add", addItem);
-// router.delete("/:id", validateToken, deleteItem);
+router.delete("/:id", deleteItem);
 // router.put("/:id", validateToken, updateItem);
 router.get("/count",countItems);
 router.get("/:id", getItemById);

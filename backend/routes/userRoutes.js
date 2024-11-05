@@ -7,14 +7,16 @@ const {
   getUserDetails,
   getAllUsers,
   editUser,
-  countUsers
+  countUsers,
+  deleteUser
 } = require("../controllers/userController");
 const {validateToken, validateAdminToken} = require("../middleware/validateTokenHandler");
 
 router.get("/list", getAllUsers);
 router.post("/login", loginUser);
 router.post("/register", registerUser);
-router.put("/:username/edit", validateAdminToken, editUser);
+router.put("/:userId/edit", editUser);
+router.delete("/:userId/delete", deleteUser);
 router.get("/current", validateToken, currentUser); 
 router.get("/count",countUsers);
 
