@@ -15,6 +15,7 @@ import AdminDashBoard from "./admin/components/AdminDashBoard";
 import ShowAllUsers from "./admin/ShowAllUsers";
 import ShowAllProducts from "./admin/ShowAllProducts";
 import Predict from "./admin/Predict";
+import UsersOrder from "./admin/UsersOrder";
 
 function App() {
   const route = createBrowserRouter([
@@ -36,6 +37,7 @@ function App() {
         { path: "/admin/show-user", element: <ShowAllUsers /> },
         { path: "/admin/show-product", element: <ShowAllProducts /> },
         { path: "/admin/predict", element: <Predict /> },
+        {path:"/admin/usersOrder",element:<UsersOrder/>}
       ],
     },
     { path: "admin/signin", element: <AdminLogin /> },

@@ -35,7 +35,7 @@ const ViewOrder = () => {
       <NavBar />
       <div className="w-full max-w-4xl p-6 mx-auto space-y-6">
         <h1 className="w-full mt-5 mb-10 text-5xl">Your Orders</h1>
-        {itemOrder.map((order, index) => (
+        {itemOrder?.map((order, index) => (
           <div key={index}>
             {/* Main Card */}
             <div
@@ -59,9 +59,9 @@ const ViewOrder = () => {
   
             {/* Sub-Cards (conditionally rendered for the specific card) */}
             {openOrder[index] && (
-              <div className="space-y-4 mt-2">
+              <div className="mt-2 space-y-4">
                 <h3 className="text-lg font-medium">Order Details</h3>
-                <div className="gap-4 grid md:grid-cols-3">
+                <div className="grid gap-4 md:grid-cols-3">
                   {order?.items?.map((subCard, subIndex) => (
                     <div
                       key={subIndex}
