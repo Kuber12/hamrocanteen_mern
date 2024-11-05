@@ -41,7 +41,7 @@ const Admin = () => {
                 Add Product
               </Link>
               <Link
-                href="#products"
+                to={"/admin/show-product"}
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
               >
                 <div className="inline-block w-5 h-5 mr-2" />
@@ -59,7 +59,7 @@ const Admin = () => {
                 className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
               >
                 <div className="inline-block w-5 h-5 mr-2" />
-                Settings
+                Orders
               </Link>
             </nav>
             <Link

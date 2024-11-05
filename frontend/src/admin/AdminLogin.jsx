@@ -21,10 +21,10 @@ const navigate = useNavigate();
     e.preventDefault();
     adminLogin(admin).then((res)=>{
       if(res == true){
-        alert("login success")
+        // alert("login success")
         navigate("/admin")
       }else{
-        alert("login failed")
+        // alert("login failed")
       }
     }).catch(err=>console.log(err))
   }

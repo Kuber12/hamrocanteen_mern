@@ -48,9 +48,9 @@ const FoodCard = ({ menu }) => {
     };
     const doesExist = cartItems.find((item) => item._id == _id);
     if (doesExist) {
-      alert("Already in cart please remove to update");
+      // alert("Already in cart please remove to update");
     } else {
-      alert("Added to cart");
+      // alert("Added to cart");
       setReload(!reload);
       cartItems.push(itemToPut);
       localStorage.setItem("cart", JSON?.stringify(cartItems));
@@ -91,7 +91,7 @@ const FoodCard = ({ menu }) => {
             </div>
 
             <div>
-              <span className="text-sm">/per plate</span>
+              <span className="text-sm">/per {(menu?.unit)}</span>
             </div>
           </div>
           <div className="flex items-center gap-x-4">

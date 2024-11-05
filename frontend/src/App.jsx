@@ -13,6 +13,7 @@ import ViewOrder from "./pages/vieworder/ViewOrder";
 import AddItem from "./admin/AddItem";
 import AdminDashBoard from "./admin/components/AdminDashBoard";
 import ShowAllUsers from "./admin/ShowAllUsers";
+import ShowAllProducts from "./admin/ShowAllProducts";
 import Predict from "./admin/Predict";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         { path: "", element: <AdminDashBoard /> },
         { path: "/admin/additem", element: <AddItem /> },
         { path: "/admin/show-user", element: <ShowAllUsers /> },
+        { path: "/admin/show-product", element: <ShowAllProducts /> },
         { path: "/admin/predict", element: <Predict /> },
       ],
     },

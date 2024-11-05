@@ -20,21 +20,21 @@ const HomePage = () => {
       </div>
       <div className="flex drop-shadow-xl place-items-top mx-[10%] h-max mt-[2rem] bg-white relative top-[-5rem] rounded-3xl">
         <div className="flex flex-1 m-6">
-          <img className="p-2 w-14 h-14 bg-alternate rounded-full" src="./play.png" alt="play"/>
+          <img className="w-14 h-14 bg-alternate" src="./order.png" alt="play"/>
           <div className="flex flex-col ml-3">
             <span className="text-primary text-2xl">Online Order</span>
             <span>Customers can pre-order their desired food.</span>
           </div>
         </div>
         <div className="flex flex-1 m-6">
-          <img className="p-2 w-14 h-14 bg-alternate rounded-full" src="./play.png" alt="play"/>
+          <img className="w-14 h-14 bg-alternate" src="./bin.png" alt="play"/>
           <div className="flex flex-col ml-3">
             <span className="text-primary text-2xl">Prevent Waste</span>
             <span>As Canteen estimate of how much to make for a particular day they can make the right amount.</span>
           </div>
         </div>
         <div className="flex flex-1 m-6">
-          <img className="p-2 w-14 h-14 bg-alternate rounded-full" src="./play.png" alt="play"/>
+          <img className="w-14 h-14 bg-alternate" src="./bill.png" alt="play"/>
           <div className="flex flex-col ml-3">
             <span className="text-primary text-2xl">Managed receipt</span>
             <span>Students as well as the business can get detailed report of sales in their canteen</span>
