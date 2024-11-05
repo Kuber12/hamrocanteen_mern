@@ -67,15 +67,15 @@ const NavBar = () => {
   }
 
   return (
-    <div className="relative bg-[#FFF0E9] w-full h-[16vh] pt-5 items-center  flex justify-center px-20">
+    <div className="relative bg-[#FFF0E9] w-full h-[16vh] pt-5 pb-3 items-center  flex justify-center px-20">
       <div className="absolute w-24 h-24 left-10">
-        <img className="w-full h-full" src="Logo.png" alt="Logo Image" />
+        <img className="w-30 h-30" src="Logo.png" alt="Logo Image" />
       </div>
       <div className="flex h-[80%] text-xl font-semibold shadow-2xl rounded-full w-[50%] justify-evenly items-center bg-[#FFFFFF] top-10 ">
         <Link to={"/"}>Home</Link>
         <Link to={"/menu"}>Menu</Link>
-        <Link to={"/about"}>About</Link>
-        <Link to={"/contact"}>Contact Us</Link>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact </a>
       </div>
       <div className="absolute right-10">
         <div className="flex gap-5">

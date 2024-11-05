@@ -85,36 +85,39 @@ const AddItem = () => {
         onSubmit={handleSubmit}
         className="max-w-md p-6 mx-auto space-y-6 bg-white rounded-lg shadow-md"
       >
-        <div className="space-y-2">
-          <label htmlFor="name">Name</label>
+        <div className="flex">
+          <label htmlFor="name" className="flex-1">Name:</label>
           <input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
+            className="flex-1 border-2 border-gray-300 rounded-md"
             required
           />
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="price">Price</label>
+        <div className="flex">
+          <label htmlFor="price" className="flex-1">Price</label>
           <input
             id="price"
             name="price"
             type="number"
             value={formData.price}
             onChange={handleInputChange}
+            className="flex-1 border-2 border-gray-300 rounded-md"
             required
           />
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="itemImg">Image</label>
+        <div className="flex">
+          <label htmlFor="itemImg" className="flex-1">Image</label>
           <input
             id="itemImg"
             name="itemImg"
             type="file"
             onChange={handleFileChange}
+            className="flex-1"
             required
           />
         </div>
@@ -157,10 +160,11 @@ const AddItem = () => {
             onChange={handleCheckboxChange}
           />
         </div>
-
-        <button className="px-2 py-1 border rounded-xl" type="submit">
-          Submit
-        </button>
+        <div className="text-center">
+          <button className="px-4 py-1 border rounded-xl" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
