@@ -53,7 +53,7 @@ const FoodCard = ({ menu }) => {
       alert("Added to cart");
       setReload(!reload);
       cartItems.push(itemToPut);
-      localStorage.setItem("cart", JSON.stringify(cartItems));
+      localStorage.setItem("cart", JSON?.stringify(cartItems));
       console.log("New local storage items" + cartItems);
     }
   }
@@ -72,18 +72,18 @@ const FoodCard = ({ menu }) => {
       </div>
       <div className="w-full font-bold py-5 px-2 h-[60%] ">
         <div className="w-full px-2 space-y-2">
-          <h1 className="text-2xl">{menu.name}</h1>
+          <h1 className="text-2xl">{menu?.name}</h1>
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
               <button
-                onClick={(e) => dispatch({ type: "DECREMENT" })}
+                onClick={() => dispatch({ type: "DECREMENT" })}
                 className="rounded-full "
               >
                 <GrSubtractCircle size={25} />
               </button>
-              <h2 className="text-2xl">{state.itemCount}</h2>
+              <h2 className="text-2xl">{state?.itemCount}</h2>
               <button
-                onClick={(e) => dispatch({ type: "INCREMENT" })}
+                onClick={() => dispatch({ type: "INCREMENT" })}
                 className="rounded-full "
               >
                 <IoMdAddCircleOutline size={30} />
@@ -96,9 +96,9 @@ const FoodCard = ({ menu }) => {
           </div>
           <div className="flex items-center gap-x-4">
             <div className="text-xl ">
-              Rs {(menu.price * state.itemCount).toFixed(2)}
+              Rs { (menu?.price * state?.itemCount).toFixed(2)}
             </div>{" "}
-            {user && user.username.length > 0 ? (
+            {user && user?.username?.length > 0 ? (
               <button
                 className="bg-[#EC5856] text-white rounded-2xl px-3 py-1 text-base"
                 onClick={(e) => handleAddToCart()}
@@ -116,7 +116,7 @@ const FoodCard = ({ menu }) => {
               </Link>
             )}
           </div>
-          <div className="text-red-800">{state.itemMessage}</div>
+          <div className="text-red-800">{state?.itemMessage}</div>
         </div>
       </div>
     </div>

@@ -32,22 +32,21 @@ const ViewOrder = () => {
 
   return (
     <>
-  <NavBar />
-  <div className="w-full max-w-4xl p-6 mx-auto space-y-6">
-    <h1 className="w-full mt-5 mb-10 text-5xl">Your Orders</h1>
-    {itemOrder.map((order, index) => (
-      <div key={index}>
-        {/* Main Card */}
-        <div
-          className="p-6 transition-shadow bg-white rounded-lg shadow-md cursor-pointer hover:shadow-lg"
-          onClick={() => toggleCard(index)} // Toggle specific card
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex-1 justify-between">
-              <h2 className="text-xl font-semibold">Orders #{index + 1}</h2>
-              <div className="flex justify-between">
-                <p className="font-bold text-gray-600">Grand Total: {order.grandTotal}</p>
-                <p className="font-bold text-gray-600">
+    <NavBar/>
+    <div className="w-full max-w-4xl p-6 mx-auto space-y-6">
+      <h1 className="w-full mt-5 mb-10 text-5xl">Your Orders</h1>
+      {itemOrder.map((order, index) => (
+        <div key={index}>
+          {/* Main Card */}
+          <div
+            className="p-6 transition-shadow bg-white rounded-lg shadow-md cursor-pointer hover:shadow-lg"
+            onClick={() => toggleCard(index)} // Toggle specific card
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-semibold">#{index + 1} Your Orders </h2>
+                <p className="text-gray-600">Grand Total: {order.grandTotal}</p>
+                <p className="text-gray-600">
                   Payment Method: {order.paymentMethod}
                 </p>
                 <p className="font-bold text-gray-600">Status: {order.status}</p>

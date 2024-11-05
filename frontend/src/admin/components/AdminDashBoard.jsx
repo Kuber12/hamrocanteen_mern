@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import UserApi from "../../apis/UserApi";
 import ItemApi from "../../apis/ItemApi";
 const AdminDashBoard = () => {
@@ -32,10 +31,10 @@ const AdminDashBoard = () => {
           <h3 className="mb-2 text-xl font-semibold">Total Items</h3>
           <p className="text-3xl font-bold">{counts.itemCount}</p>
         </div>
-        <div className="p-6 bg-white rounded-lg shadow-md">
+        {/* <div className="p-6 bg-white rounded-lg shadow-md">
           <h3 className="mb-2 text-xl font-semibold">Total Orders</h3>
-          <p className="text-3xl font-bold">89</p>
-        </div>
+          <p className="text-3xl font-bold"></p>
+        </div> */}
       </div>
     </>
   );
